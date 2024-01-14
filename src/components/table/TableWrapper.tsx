@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { FileType } from "../../typing";
+import { FileType } from "@/typing";
 import { Button } from "../ui/button";
 import { columns } from "./Columns";
 import { DataTable } from "./Table";
@@ -19,7 +19,7 @@ const TableWrapper = ({ skeletonFiles }: { skeletonFiles: FileType[] }) => {
     user &&
       query(
         collection(db, "users", user.id, "files"),
-        orderBy("timestamp", sort)
+        orderBy("timeStamp", sort)
       )
   );
 
