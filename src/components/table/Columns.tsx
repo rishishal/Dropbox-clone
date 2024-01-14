@@ -6,6 +6,7 @@ import prettyBytes from "pretty-bytes";
 import Link from "next/link";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import { COLOR_EXTENSION_MAP } from "../../constants";
+import { Download } from "lucide-react";
 
 export const columns: ColumnDef<FileType>[] = [
   {
@@ -45,13 +46,13 @@ export const columns: ColumnDef<FileType>[] = [
     accessorKey: "downloadURL",
     header: "Link",
     cell: ({ renderValue, ...props }) => (
-      <Link
+      <a
         href={renderValue() as string}
         target='_blank'
         className='underline text-blue-500 hover:text-blue-600'
       >
-        Download
-      </Link>
+        <Download />
+      </a>
     ),
   },
 ];

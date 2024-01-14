@@ -7,6 +7,7 @@ import {
   doc,
   serverTimestamp,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { useState } from "react";
 import DropzoneComponent from "react-dropzone";
@@ -41,37 +42,29 @@ const Dropzone = () => {
 
     setLoading(true);
 
+    //addDoc => users/user1234/files
+
+    const docRef = await addDoc(collection(db, "users", user.id, "files"), {
+      userId: user.id,
+      filename: selectedFile.name,
+      fullName: user.fullName,
+      profileImg: user.imageUrl,
+      timestamp: serverTimestamp(),
+      type: selectedFile.type,
+      size: selectedFile.size,
+    });
+
     //Uploading File in Firebase Stroge and Database in one funtion
 
-    const imageRef = ref(
-      storage,
-      `users/${user.id}/files/${selectedFile.name}`
-    );
-    uploadBytes(imageRef, selectedFile)
-      .then(async (snapshot) => {
-        console.log("Uploaded a blob or file!");
-      })
-      .then((resp) => {
-        getDownloadURL(imageRef).then(async (downloadURL) => {
-          console.log("file available at", downloadURL);
+    const imageRef = ref(storage, `users/${user.id}/files/${docRef.id}`);
+    uploadBytes(imageRef, selectedFile).then(async (snapshot) => {
+      const downloadURL = await getDownloadURL(imageRef);
 
-          //addDoc => users/user1234/files
-
-          const docRef = await addDoc(
-            collection(db, "users", user.id, "files"),
-            {
-              userId: user.id,
-              filename: selectedFile.name,
-              fullName: user.fullName,
-              profileImg: user.imageUrl,
-              timeStamp: serverTimestamp(),
-              type: selectedFile.type,
-              size: selectedFile.size,
-              downloadURL: downloadURL,
-            }
-          );
-        });
+      await updateDoc(doc(db, "users", user.id, "files", docRef.id), {
+        downloadURL: downloadURL,
       });
+    });
+
     setLoading(false);
   };
 
