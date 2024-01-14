@@ -10,8 +10,7 @@ import {
 } from "firebase/firestore";
 import { useState } from "react";
 import DropzoneComponent from "react-dropzone";
-import { db, storage } from "../../firebase";
-import { profile, timeStamp } from "console";
+import { db, storage } from "../firebase";
 import {
   getDownloadURL,
   ref,
