@@ -6,7 +6,11 @@ import prettyBytes from "pretty-bytes";
 import Link from "next/link";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import { COLOR_EXTENSION_MAP } from "../../constants";
-import { Download, Share } from "lucide-react";
+import { Download, Share, TrashIcon } from "lucide-react";
+import { Button } from "../ui/button";
+import { useAppStore } from "@/store/store";
+
+const useAppState = () => useAppStore((state) => state);
 
 export const columns: ColumnDef<FileType>[] = [
   {
@@ -58,5 +62,29 @@ export const columns: ColumnDef<FileType>[] = [
   {
     accessorKey: "",
     header: "Share",
+  },
+
+  {
+    accessorKey: "id",
+    header: "Delete",
+    cell: ({ renderValue, row }) => {
+      const fileId = renderValue() as string;
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { setIsDeleteModalOpen, setFileId } = useAppState();
+
+      return (
+        <div className='w-10'>
+          <Button
+            variant={"outline"}
+            onClick={() => {
+              setFileId(fileId);
+              setIsDeleteModalOpen(true);
+            }}
+          >
+            <TrashIcon size={20} />
+          </Button>
+        </div>
+      );
+    },
   },
 ];

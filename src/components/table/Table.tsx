@@ -45,11 +45,6 @@ export function DataTable<TData, TValue>({
       state.setIsRenameModalOpen,
     ]);
 
-  const openDeleteModal = (fileId: string) => {
-    setFileId(fileId);
-    setIsDeleteModalopen(true);
-  };
-
   const openRenameModal = (fileId: string, filename: string) => {
     setFileId(fileId);
     setFilename(filename);
@@ -117,17 +112,6 @@ export function DataTable<TData, TValue>({
                     )}
                   </TableCell>
                 ))}
-
-                <TableCell key={(row.original as FileType).id}>
-                  <Button
-                    variant={"outline"}
-                    onClick={() =>
-                      openDeleteModal((row.original as FileType).id)
-                    }
-                  >
-                    <TrashIcon size={20} />
-                  </Button>
-                </TableCell>
               </TableRow>
             ))
           ) : (
