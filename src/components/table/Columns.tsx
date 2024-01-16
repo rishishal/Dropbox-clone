@@ -6,7 +6,7 @@ import prettyBytes from "pretty-bytes";
 import Link from "next/link";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import { COLOR_EXTENSION_MAP } from "../../constants";
-import { Download } from "lucide-react";
+import { Download, Share } from "lucide-react";
 
 export const columns: ColumnDef<FileType>[] = [
   {
@@ -54,5 +54,9 @@ export const columns: ColumnDef<FileType>[] = [
         <Download />
       </a>
     ),
+  },
+  {
+    accessorKey: "",
+    header: "Share",
   },
 ];

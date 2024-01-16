@@ -19,7 +19,6 @@ import { FileType } from "@/typing";
 import { Button } from "../ui/button";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useAppStore } from "@/store/store";
-import { stat } from "fs";
 import { DeleteModal } from "../DeleteModal";
 import RenameModal from "../RenameModal";
 

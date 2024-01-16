@@ -1,8 +1,8 @@
 import Dropzone from "@/components/Dropzone";
 import { auth } from "@clerk/nextjs";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
-import { FileType } from "../../typing";
+import { db } from "../../../firebase";
+import { FileType } from "../../../typing";
 import TableWrapper from "@/components/table/TableWrapper";
 
 const Dashboard = async () => {

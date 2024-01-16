@@ -49,11 +49,12 @@ const Dropzone = () => {
     const docRef = await addDoc(collection(db, "users", user.id, "files"), {
       userId: user.id,
       filename: selectedFile.name,
-      fullName: user.fullName,
+      fullName: user?.fullName,
       profileImg: user.imageUrl,
       timestamp: serverTimestamp(),
       type: selectedFile.type,
       size: selectedFile.size,
+      userEmail: user?.primaryEmailAddress?.emailAddress,
     });
 
     //Uploading File in Firebase Stroge and Database in one funtion
@@ -64,6 +65,7 @@ const Dropzone = () => {
 
       await updateDoc(doc(db, "users", user.id, "files", docRef.id), {
         downloadURL: downloadURL,
+        shortUrl: process.env.NEXT_PUBLIC_BASE_URL + docRef.id,
       });
     });
 
