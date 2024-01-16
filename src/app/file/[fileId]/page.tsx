@@ -1,6 +1,6 @@
+"use client";
 interface FilePreProps {
   params: { fileId: string };
-  file: File;
 }
 
 const page: React.FC<FilePreProps> = ({ params }) => {
