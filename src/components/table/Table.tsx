@@ -16,11 +16,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { FileType } from "@/typing";
-import { Button } from "../ui/button";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useAppStore } from "@/store/store";
 import { DeleteModal } from "../DeleteModal";
 import RenameModal from "../RenameModal";
+import { ShareModal } from "../ShareModal";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -81,6 +81,7 @@ export function DataTable<TData, TValue>({
               >
                 <DeleteModal />
                 <RenameModal />
+                {/* <ShareModal /> */}
 
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

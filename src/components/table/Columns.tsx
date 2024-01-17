@@ -59,10 +59,6 @@ export const columns: ColumnDef<FileType>[] = [
       </a>
     ),
   },
-  {
-    accessorKey: "",
-    header: "Share",
-  },
 
   {
     accessorKey: "id",

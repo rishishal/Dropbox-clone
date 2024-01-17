@@ -35,6 +35,8 @@ const TableWrapper = ({ skeletonFiles }: { skeletonFiles: FileType[] }) => {
       downloadURL: doc.data().downloadURL,
       type: doc.data().type,
       size: doc.data().size,
+      shortUrl: doc.data().shortUrl,
+      userEmail: doc.data().userEmail,
     }));
 
     setInitialFiles(files);
@@ -78,7 +80,6 @@ const TableWrapper = ({ skeletonFiles }: { skeletonFiles: FileType[] }) => {
       >
         Sort By {sort === "desc" ? "Newest" : "Oldest"}
       </Button>
-
       <DataTable columns={columns} data={initialFiles} />
     </div>
   );
