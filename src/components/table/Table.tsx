@@ -81,7 +81,7 @@ export function DataTable<TData, TValue>({
               >
                 <DeleteModal />
                 <RenameModal />
-                {/* <ShareModal /> */}
+                <ShareModal />
 
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

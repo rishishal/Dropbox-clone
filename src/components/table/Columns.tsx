@@ -62,6 +62,30 @@ export const columns: ColumnDef<FileType>[] = [
 
   {
     accessorKey: "id",
+    header: "Share",
+    cell: ({ renderValue, row }) => {
+      const fileId = renderValue() as string;
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { setIsShareModalOpen, setFileId } = useAppState();
+
+      return (
+        <div className='w-10'>
+          <Button
+            variant={"outline"}
+            onClick={() => {
+              setFileId(fileId);
+              setIsShareModalOpen(true);
+            }}
+          >
+            <Share size={20} />
+          </Button>
+        </div>
+      );
+    },
+  },
+
+  {
+    accessorKey: "id",
     header: "Delete",
     cell: ({ renderValue, row }) => {
       const fileId = renderValue() as string;

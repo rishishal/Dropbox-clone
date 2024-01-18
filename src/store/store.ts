@@ -11,24 +11,18 @@ interface AppState {
   setIsShareModalOpen: (open: boolean) => void;
 
   fileId: string | null;
-  setFileId: (fileId: string) => void;
+  setFileId: (fileId: string | null) => void;
 
   filename: string;
   setFilename: (filename: string) => void;
-
-  userID: string;
-  setuserID: (userID: string) => void;
 }
 
 export const useAppStore = create<AppState>()((set) => ({
   fileId: null,
-  setFileId: (fileId: string) => set((state) => ({ fileId })),
+  setFileId: (fileId: string | null) => set((state) => ({ fileId })),
 
   filename: "",
   setFilename: (filename: string) => set((state) => ({ filename })),
-
-  userID: "",
-  setuserID: (userID: string) => set((state) => ({ userID })),
 
   isDeleteModalOpen: false,
   setIsDeleteModalOpen: (open) => set((state) => ({ isDeleteModalOpen: open })),
