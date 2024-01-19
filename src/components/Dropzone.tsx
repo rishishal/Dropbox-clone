@@ -65,7 +65,7 @@ const Dropzone = () => {
 
       await updateDoc(doc(db, "users", user.id, "files", docRef.id), {
         downloadURL: downloadURL,
-        shortUrl: process.env.NEXT_PUBLIC_BASE_URL + docRef.id,
+        shortUrl: `${process.env.NEXT_PUBLIC_BASE_URL}${user.id}/file/${docRef.id}`,
       });
     });
 
