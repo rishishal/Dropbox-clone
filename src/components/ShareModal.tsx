@@ -10,7 +10,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,11 +20,14 @@ import { FileType } from "@/typing";
 import { useEffect, useState } from "react";
 import { db } from "@/firebase";
 import toast from "react-hot-toast";
+import GlobalApi from "./GlobalApi";
+import { SendEmailProps } from "@/typing";
 
 export function ShareModal() {
   const { user } = useUser();
 
   const [file, setFile] = useState<FileType | null>();
+  const [email, setEmail] = useState<string | null>();
 
   const [isShareModalOpen, setIsShareModalOpen, fileId, setFileId] =
     useAppStore((state) => [
@@ -55,11 +57,27 @@ export function ShareModal() {
   };
   useEffect(() => {
     fileId && ShareFile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileId, setFileId, setIsShareModalOpen]);
 
   const onCopyClick = () => {
     navigator.clipboard.writeText(file?.shortUrl!);
     toast.success("Copied");
+  };
+
+  const sendEmail = () => {
+    const data: SendEmailProps = {
+      emailToSend: email || "",
+      emailFrom: file?.userEmail,
+      userName: file?.fullName,
+      fileName: file?.filename,
+      fileSize: file?.size,
+      fileType: file?.type,
+      shortUrl: file?.shortUrl,
+    };
+    GlobalApi.SendEmail(data).then((resp) => {
+      console.log(resp);
+    });
   };
 
   return (
@@ -73,25 +91,46 @@ export function ShareModal() {
         <DialogHeader>
           <DialogTitle>{file?.filename}</DialogTitle>
           <DialogDescription>
-            Anyone who has this link will be able to view this.
+            <p className='text-xs text-gray-600'>You can share your File </p>
           </DialogDescription>
         </DialogHeader>
-        <div className='flex items-center space-x-2'>
+
+        <div className='flex items-center space-x-2 my-2'>
           <div className='grid flex-1 gap-2'>
             <Label htmlFor='link' className='sr-only'>
               Link
             </Label>
             <Input id='link' value={file?.shortUrl} readOnly />
-            {/* <h1>{file?.shortUrl}</h1> */}
           </div>
+
           <Button
             type='submit'
             size='sm'
-            className='px-3'
+            className='px-3 '
             onClick={() => onCopyClick()}
           >
             <span className='sr-only'>Copy</span>
             <CopyIcon className='h-4 w-4' />
+          </Button>
+        </div>
+
+        <div className='flex items-center space-x-2'>
+          <div className='grid flex-1 gap-2'>
+            <Label htmlFor='Email' className='sr-only'>
+              Email
+            </Label>
+            <Input
+              id='Email'
+              placeholder='Enter Your Email'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <Button
+            type='submit'
+            className='ml-auto w-fit'
+            onClick={() => sendEmail()}
+          >
+            Sent
           </Button>
         </div>
         <DialogFooter className='sm:justify-start'>

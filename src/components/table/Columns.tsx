@@ -6,7 +6,7 @@ import prettyBytes from "pretty-bytes";
 import Link from "next/link";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import { COLOR_EXTENSION_MAP } from "../../constants";
-import { Download, Share, TrashIcon } from "lucide-react";
+import { Eye, Share, TrashIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useAppStore } from "@/store/store";
 
@@ -55,7 +55,7 @@ export const columns: ColumnDef<FileType>[] = [
         target='_blank'
         className='underline text-blue-500 hover:text-blue-600'
       >
-        <Download />
+        <Eye />
       </a>
     ),
   },
