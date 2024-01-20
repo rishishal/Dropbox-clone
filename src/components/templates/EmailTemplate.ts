@@ -105,10 +105,6 @@ export const EmailTemplate = `
                         width="100%">
 
                         <!-- START MAIN CONTENT AREA -->
-                        // <tr>
-                        //     <td><img src="https://drive.google.com/file/d/1g0jSO0LZn24WYOL74b3o0tDmm6Nmb6yl/view?usp=sharing" alt="logo"
-                        //             style="height: 54px; width:54px; margin-left: 20px; margin-top: 15px;"></td>
-                        // </tr>
                         <tr>
                             <td class="wrapper"
                                 style="font-family: Helvetica, sans-serif; font-size: 16px; vertical-align: top; box-sizing: border-box; padding: 24px;"

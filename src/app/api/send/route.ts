@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export function compileWelcomeTemplate(
+function compileWelcomeTemplate(
   userName: string,
   emailFrom: string,
   fileName: string,
