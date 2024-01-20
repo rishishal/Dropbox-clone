@@ -17,7 +17,7 @@ interface PageParams {
   file: File;
 }
 
-const page: React.FC<PageParams> = ({ params }) => {
+const FileU: React.FC<PageParams> = ({ params }) => {
   const userId = params?.userId;
   const fileId = params?.fileId;
 
@@ -50,4 +50,5 @@ const page: React.FC<PageParams> = ({ params }) => {
     </div>
   );
 };
-export default page;
+
+export default FileU;
