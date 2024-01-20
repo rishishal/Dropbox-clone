@@ -5,7 +5,7 @@ import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { FileType } from "@/typing";
+import { File } from "@/typing";
 import FileItems from "./_components/FileItems";
 import Link from "next/link";
 
@@ -14,14 +14,14 @@ interface PageParams {
     userId: string;
     fileId: string;
   };
-  file: FileType;
+  file: File;
 }
 
 const page: React.FC<PageParams> = ({ params }) => {
   const userId = params?.userId;
   const fileId = params?.fileId;
 
-  const [file, setFile] = useState<FileType | null>();
+  const [file, setFile] = useState<File | null>();
 
   useEffect(() => {
     userId && fileId && getFileInfo();
@@ -34,7 +34,7 @@ const page: React.FC<PageParams> = ({ params }) => {
 
     if (docSnap.exists()) {
       // console.log("Document data:", docSnap.data());
-      setFile(docSnap.data() as FileType);
+      setFile(docSnap.data() as File);
     } else {
       // docSnap.data() will be undefined in this case
       console.log("No such document!");

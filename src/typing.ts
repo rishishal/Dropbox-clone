@@ -19,3 +19,10 @@ export type SendEmailProps = {
   fileType: string | undefined;
   shortUrl: string | undefined;
 };
+
+export interface File {
+  filename: string;
+  fullName: string;
+  type: string;
+  size: number;
+}

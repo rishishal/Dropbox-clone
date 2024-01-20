@@ -1,11 +1,11 @@
 "use client";
 import { Download } from "lucide-react";
 import Image from "next/image";
-import { FileType } from "@/typing";
+import { File } from "@/typing";
 import { ReactElement } from "react";
 
 interface fileItemProps {
-  file: FileType;
+  file: File;
 }
 
 const FileItems: React.FC<fileItemProps> = ({ file }): ReactElement => {
