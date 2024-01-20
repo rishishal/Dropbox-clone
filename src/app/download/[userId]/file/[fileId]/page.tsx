@@ -17,7 +17,7 @@ interface PageParams {
   file: FileType;
 }
 
-const page = ({ params }: PageParams) => {
+const page: React.FC<PageParams> = ({ params }) => {
   const userId = params.userId;
   const fileId = params.fileId;
 
