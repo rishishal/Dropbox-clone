@@ -78,6 +78,7 @@ export function ShareModal() {
     GlobalApi.SendEmail(data).then((resp) => {
       console.log(resp);
     });
+    toast.success("Email Sent");
   };
 
   return (
