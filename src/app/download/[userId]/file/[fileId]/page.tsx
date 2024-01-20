@@ -4,23 +4,22 @@ import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { File } from "@/typing";
 import FileItems from "./_components/FileItems";
 import Link from "next/link";
+import { FileType } from "@/typing";
 
-interface UserProps {
+const UserFile = ({
+  params,
+}: {
   params: {
     userId: string;
     fileId: string;
   };
-  file: File;
-}
-
-const UserFile: React.FC<UserProps> = ({ params }) => {
+}) => {
   const userId = params?.userId;
   const fileId = params?.fileId;
 
-  const [file, setFile] = useState<File | null>();
+  const [file, setFile] = useState<FileType | null>(null); // Initialize with null
 
   useEffect(() => {
     userId && fileId && getFileInfo();
@@ -32,10 +31,13 @@ const UserFile: React.FC<UserProps> = ({ params }) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data());
-      setFile(docSnap.data() as File);
+      const fileData = docSnap.data();
+      if (fileData) {
+        setFile(fileData as FileType);
+      } else {
+        console.log("Document data is undefined!");
+      }
     } else {
-      // docSnap.data() will be undefined in this case
       console.log("No such document!");
     }
   };
@@ -45,7 +47,7 @@ const UserFile: React.FC<UserProps> = ({ params }) => {
       <Link href='/'>
         <Image src='/dropbox.svg' alt='LOGO' width={60} height={60} />
       </Link>
-      <FileItems file={file!} />
+      {file && <FileItems file={file} />}
     </div>
   );
 };
