@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import { db } from "@/firebase";
@@ -9,7 +8,7 @@ import { File } from "@/typing";
 import FileItems from "./_components/FileItems";
 import Link from "next/link";
 
-interface PageParams {
+interface UserProps {
   params: {
     userId: string;
     fileId: string;
@@ -17,7 +16,7 @@ interface PageParams {
   file: File;
 }
 
-const FileU: React.FC<PageParams> = ({ params }) => {
+const UserFile: React.FC<UserProps> = ({ params }) => {
   const userId = params?.userId;
   const fileId = params?.fileId;
 
@@ -51,4 +50,4 @@ const FileU: React.FC<PageParams> = ({ params }) => {
   );
 };
 
-export default FileU;
+export default UserFile;
